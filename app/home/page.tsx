@@ -50,7 +50,7 @@ export default function Home() {
           }  justify-center`}
         >
           <button
-            onClick={() => router.push("/start")}
+            onClick={() => router.push("/create")}
             className="w-full py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-xl transform hover:scale-110 hover:from-blue-600 hover:to-blue-800 transition-all duration-500 ease-in-out focus:ring-4 focus:ring-blue-300"
           >
             <FaPlay className="inline-block mr-2" /> Start a New Quiz
