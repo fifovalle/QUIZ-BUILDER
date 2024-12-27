@@ -4,9 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { supabase } from "@/utils/supabaseClient";
 
 export function useCheckAnswerQuiz() {
-  const userID = sessionStorage.getItem("uid");
   const [loading, setLoading] = useState<boolean>(false);
   const [hasAnswered, setHasAnswered] = useState<boolean>(false);
+  const userID =
+    typeof window !== "undefined" ? sessionStorage.getItem("uid") : null;
 
   useEffect(() => {
     if (userID) {
