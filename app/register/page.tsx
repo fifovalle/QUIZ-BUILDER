@@ -4,20 +4,29 @@ import { useState } from "react";
 import logo from "@/app/favicon.ico";
 import Loading from "@/components/loading";
 import { useRouter } from "next/navigation";
+import { useDirect } from "@/hooks/backend/useDirect";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useDirect } from "@/hooks/backend/useDirect";
-import { useLoginsignInWithPassword } from "@/hooks/backend/useLoginsignInWithPassword";
+import { useRegisterWithEmailPassword } from "@/hooks/backend/useRegisterWithEmailPassword";
 
 export default function Login() {
   const router = useRouter();
-  const { email, setEmail, password, setPassword, loading, handleLogin } =
-    useLoginsignInWithPassword();
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    loading,
+    handleRegister,
+  } = useRegisterWithEmailPassword();
 
   useDirect();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <div className="relative flex h-screen items-center justify-center bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 overflow-hidden">
@@ -35,7 +44,7 @@ export default function Login() {
           Please login to continue
         </p>
         {/* Login Form */}
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form onSubmit={handleRegister} className="space-y-6">
           {/* Email Input */}
           <div className="relative">
             <input
@@ -77,28 +86,64 @@ export default function Login() {
             </button>
           </div>
 
+          {/* Confirm Password Input */}
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              className="peer mt-4 block w-full p-3 border-2 border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
+              placeholder=" "
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <label className="absolute left-3 top-0 text-gray-600 text-sm transition-all transform -translate-y-1/2 scale-75 peer-focus:top-0 peer-focus:text-indigo-500 peer-focus:scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:scale-100 bg-white">
+              Confirm Password
+            </label>
+            <button
+              type="button"
+              className="absolute right-3 top-4"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? (
+                <FaEyeSlash className="text-gray-600" />
+              ) : (
+                <FaEye className="text-gray-600" />
+              )}
+            </button>
+          </div>
+
           {/* Submit Button */}
           <button
             type="submit"
             className={`w-full py-3 px-4 rounded-md text-white bg-indigo-600 transition-all duration-300 ${
-              loading || !email || !password
+              loading ||
+              !email ||
+              !password ||
+              password !== confirmPassword ||
+              !confirmPassword
                 ? "opacity-50 hover:cursor-not-allowed"
                 : "hover:bg-indigo-700"
             }`}
-            disabled={loading || !email || !password}
+            disabled={
+              loading ||
+              !email ||
+              !password ||
+              password !== confirmPassword ||
+              !confirmPassword
+            }
           >
-            {loading ? <Loading /> : "Login"}
+            {loading ? <Loading /> : "Register"}
           </button>
         </form>
 
-        {/* Registration Link */}
+        {/* Login Link */}
         <p className="text-sm text-center mt-6 text-gray-700">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <a
-            onClick={() => router.push("/register")}
+            onClick={() => router.push("/")}
             className="text-indigo-500 hover:underline hover:cursor-pointer"
           >
-            Register now
+            Login
           </a>
         </p>
       </div>
