@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { FaSave } from "react-icons/fa";
 import Loading from "@/components/loading";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,37 +6,14 @@ import { ToastContainer } from "react-toastify";
 import { useQuiz } from "@/hooks/backend/useQuiz";
 
 export default function Quiz() {
-  const { quizzes, loading } = useQuiz();
-
-  const [answers, setAnswers] = useState<
-    Record<number, Record<number, string>>
-  >({});
-
-  const handleAnswerChange = (
-    quizId: number,
-    questionId: number,
-    answer: string
-  ) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [quizId]: {
-        ...prev[quizId],
-        [questionId]: answer,
-      },
-    }));
-  };
-
-  const handleSubmit = () => {
-    Object.keys(answers)
-      .map((quizId) => {
-        return Object.keys(answers[parseInt(quizId)]).map((questionId) => ({
-          quiz_id: parseInt(quizId),
-          question_id: parseInt(questionId),
-          answer: answers[parseInt(quizId)][parseInt(questionId)],
-        }));
-      })
-      .flat();
-  };
+  const {
+    quizzes,
+    loading,
+    loadingSubmit,
+    answers,
+    handleAnswerChange,
+    handleSubmit,
+  } = useQuiz();
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-700 p-8">
@@ -60,9 +36,9 @@ export default function Quiz() {
               </h3>
               <p className="text-xl text-gray-200 mb-8">{quiz.description}</p>
 
-              {quiz.questions.map((question) => (
+              {quiz.questions.map((question, index) => (
                 <div
-                  key={question.id}
+                  key={index}
                   className="bg-white p-8 rounded-lg shadow-lg mb-8 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 >
                   <p className="text-2xl font-semibold text-indigo-800 mb-6">
@@ -101,9 +77,13 @@ export default function Quiz() {
         <div className="flex justify-center mt-8">
           <button
             onClick={handleSubmit}
-            className="flex items-center text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-8 py-4 rounded-full shadow-xl hover:bg-gradient-to-l hover:scale-105 transform transition-all duration-300 ease-in-out"
+            disabled={loadingSubmit}
+            className={`flex items-center text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-8 py-4 rounded-full shadow-xl hover:bg-gradient-to-l hover:scale-105 transform transition-all duration-300 ease-in-out ${
+              loadingSubmit ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            <FaSave className="mr-3" /> {loading ? <Loading /> : "Save Answers"}
+            <FaSave className="mr-3" />{" "}
+            {loadingSubmit ? <Loading /> : "Save Answers"}
           </button>
         </div>
       </div>
