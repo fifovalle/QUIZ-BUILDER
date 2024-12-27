@@ -124,5 +124,5 @@ Have questions or want to collaborate? Reach out to me:
 ---
 
 <div align="center">  
-  &copy; 2024 [Your Name]  
+  &copy; 2024 NAUFAL FIFA
 </div>
