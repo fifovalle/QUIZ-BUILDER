@@ -11,7 +11,8 @@ export function useShowQuiz() {
     totalQuestions: 0,
   });
   const [loading, setLoading] = useState(true);
-  const userID = sessionStorage.getItem("uid");
+  const userID =
+    typeof window !== "undefined" ? sessionStorage.getItem("uid") : null;
 
   useEffect(() => {
     // If user ID is not found, show error and stop loading
