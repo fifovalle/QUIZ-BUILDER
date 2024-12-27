@@ -93,7 +93,7 @@ Have questions or want to collaborate? Reach out to me:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/quiz-builder.git
+   git clone https://github.com/fifovalle/Quiz-Builder.git
    ```
 
 2. Install dependencies:
