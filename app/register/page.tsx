@@ -1,10 +1,10 @@
 "use client";
+import i18n from "@/app/i18n";
 import Image from "next/image";
 import { useState } from "react";
 import logo from "@/app/favicon.ico";
 import Loading from "@/components/loading";
 import { useRouter } from "next/navigation";
-import { useDirect } from "@/hooks/backend/useDirect";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -23,8 +23,6 @@ export default function Login() {
     handleRegister,
   } = useRegisterWithEmailPassword();
 
-  useDirect();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -38,10 +36,10 @@ export default function Login() {
         </div>
         {/* Heading */}
         <h1 className="text-3xl font-extrabold text-center mb-6 text-gray-800">
-          Welcome Back
+          {i18n.t("register")}
         </h1>
         <p className="text-center text-lg text-gray-600 mb-6">
-          Please login to continue
+          {i18n.t("pleaseRegister")}
         </p>
         {/* Login Form */}
         <form onSubmit={handleRegister} className="space-y-6">
@@ -56,7 +54,7 @@ export default function Login() {
               required
             />
             <label className="absolute left-3 top-0 text-gray-600 text-sm transition-all transform -translate-y-1/2 scale-75 peer-focus:top-0 peer-focus:text-indigo-500 peer-focus:scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:scale-100 bg-white">
-              Email
+              {i18n.t("email")}
             </label>
           </div>
 
@@ -71,7 +69,7 @@ export default function Login() {
               required
             />
             <label className="absolute left-3 top-0 text-gray-600 text-sm transition-all transform -translate-y-1/2 scale-75 peer-focus:top-0 peer-focus:text-indigo-500 peer-focus:scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:scale-100 bg-white">
-              Password
+              {i18n.t("password")}
             </label>
             <button
               type="button"
@@ -97,7 +95,7 @@ export default function Login() {
               required
             />
             <label className="absolute left-3 top-0 text-gray-600 text-sm transition-all transform -translate-y-1/2 scale-75 peer-focus:top-0 peer-focus:text-indigo-500 peer-focus:scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:scale-100 bg-white">
-              Confirm Password
+              {i18n.t("confirmPassword")}
             </label>
             <button
               type="button"
@@ -132,18 +130,18 @@ export default function Login() {
               !confirmPassword
             }
           >
-            {loading ? <Loading /> : "Register"}
+            {loading ? <Loading /> : `${i18n.t("register")}`}
           </button>
         </form>
 
         {/* Login Link */}
         <p className="text-sm text-center mt-6 text-gray-700">
-          Already have an account?{" "}
+          {i18n.t("alreadyHaveAccount")}{" "}
           <a
             onClick={() => router.push("/")}
             className="text-indigo-500 hover:underline hover:cursor-pointer"
           >
-            Login
+            {i18n.t("login")}
           </a>
         </p>
       </div>

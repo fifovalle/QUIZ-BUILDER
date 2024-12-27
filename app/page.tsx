@@ -1,4 +1,5 @@
 "use client";
+import i18n from "@/app/i18n";
 import Image from "next/image";
 import { useState } from "react";
 import logo from "@/app/favicon.ico";
@@ -29,10 +30,10 @@ export default function Login() {
         </div>
         {/* Heading */}
         <h1 className="text-3xl font-extrabold text-center mb-6 text-gray-800">
-          Welcome Back
+          {i18n.t("welcomeBack")}
         </h1>
         <p className="text-center text-lg text-gray-600 mb-6">
-          Please login to continue
+          {i18n.t("pleaseContinue")}
         </p>
         {/* Login Form */}
         <form onSubmit={handleLogin} className="space-y-6">
@@ -47,7 +48,7 @@ export default function Login() {
               required
             />
             <label className="absolute left-3 top-0 text-gray-600 text-sm transition-all transform -translate-y-1/2 scale-75 peer-focus:top-0 peer-focus:text-indigo-500 peer-focus:scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:scale-100 bg-white">
-              Email
+              {i18n.t("email")}
             </label>
           </div>
 
@@ -62,7 +63,7 @@ export default function Login() {
               required
             />
             <label className="absolute left-3 top-0 text-gray-600 text-sm transition-all transform -translate-y-1/2 scale-75 peer-focus:top-0 peer-focus:text-indigo-500 peer-focus:scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:scale-100 bg-white">
-              Password
+              {i18n.t("password")}
             </label>
             <button
               type="button"
@@ -87,18 +88,18 @@ export default function Login() {
             }`}
             disabled={loading || !email || !password}
           >
-            {loading ? <Loading /> : "Login"}
+            {loading ? <Loading /> : `${i18n.t("login")}`}
           </button>
         </form>
 
         {/* Registration Link */}
         <p className="text-sm text-center mt-6 text-gray-700">
-          Don't have an account?{" "}
+          {i18n.t("dontHaveAccount")}{" "}
           <a
             onClick={() => router.push("/register")}
             className="text-indigo-500 hover:underline hover:cursor-pointer"
           >
-            Register now
+            {i18n.t("register")}.
           </a>
         </p>
       </div>

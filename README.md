@@ -1,12 +1,15 @@
-# Welcome to **"Quiz Builder"** 📚✨
+---
 
-Explore our latest project designed to simplify quiz management for students and teachers. With an intuitive interface and robust features, Quiz Builder ensures a seamless experience for managing and taking quizzes.
+# Welcome to **"Quiz Builder"** 🎓✨
+
+**Empowering Learning with Seamless Quiz Management**  
+**Quiz Builder** is the ultimate solution for simplifying quiz management for **students** and **teachers**. With an intuitive interface and powerful features, the platform combines ease of use and functionality for creating, managing, and analyzing quizzes.
 
 ---
 
 ## 🚧 **Project Status**
 
-- **Status:** In Development
+- **Status:** Completed
 - **Planned Release Date:** December 2024
 
 ---
@@ -15,50 +18,85 @@ Explore our latest project designed to simplify quiz management for students and
 
 ### **1. User Authentication**
 
-- **Roles:** Supports login for both **Students** and **Teachers**.
-- **Backend:** Secure authentication using Supabase.
-- **API:**
+- **User Roles:**
+  - **Students:** Access assigned quizzes, submit answers, and view their own results.
+  - **Teachers:** Create and manage quizzes, view student submissions, and track individual or class performance.
+- **Backend:** Secure authentication powered by Supabase.
+- **API Endpoints:**
   - `POST /auth/login` for user login.
   - `POST /auth/register` for user registration.
-  - `GET /auth/logout` for logging out users.
+  - `GET /auth/logout` to log users out.
 
-### **2. Role-Based Access Control**
+---
+
+### **2. Role-Based Access Control (RBAC)**
 
 - **Students:**
-  - View assigned quizzes.
-  - Submit completed quizzes.
+  - View a list of assigned quizzes.
+  - Submit quiz answers for evaluation.
+  - Access their own results and feedback.
 - **Teachers:**
-  - Create, edit, and manage quizzes.
-  - View student performance reports.
+  - Create, update, and delete quizzes.
+  - Review quiz submissions with detailed student performance metrics.
+  - Access performance reports for quizzes and classes.
+
+---
 
 ### **3. Quiz Management**
 
-- **Features:**
+- **Teacher Features:**
+  - Design quizzes with multiple-choice and open-ended questions.
+  - Set quiz duration and deadlines.
+  - Enable **automatic grading** for multiple-choice questions.
+  - Review open-ended answers manually.
+  - Export quiz results in CSV format.
+- **API Endpoints:**
+  - `POST /quizzes` to create new quizzes.
+  - `GET /quizzes` to retrieve a list of all quizzes.
+  - `PUT /quizzes/{quizId}` to edit quiz details.
 
-  - Create multiple-choice quizzes.
-  - Set time limits for quizzes.
-  - Assign quizzes to specific students or groups.
+---
 
-- **API:**
-  - `POST /quizzes` to create a new quiz.
-  - `GET /quizzes` to fetch all quizzes.
-  - `PUT /quizzes/{quizId}` to update quiz details.
-  - `DELETE /quizzes/{quizId}` to delete a quiz.
+### **4. Student Quiz Portal**
 
-### **4. Real-Time Submissions**
+- **Features for Students:**
+  - Attempt quizzes assigned by teachers within the deadline.
+  - Save progress and resume incomplete quizzes.
+  - Receive instant feedback on multiple-choice questions.
+  - View detailed results, including correct answers and explanations.
 
-- Students can submit answers in real-time.
-- Teachers can view and grade submissions instantly.
+---
 
-### **5. Performance Reports**
+### **5. Grading and Analytics**
 
-- Generate detailed reports for quizzes.
-- Track individual and group performance.
+- **For Teachers:**
+  - Automatic grading for objective questions.
+  - Option for manual grading for subjective questions.
+  - Provide comments on student submissions.
+  - View analytics such as:
+    - Average class scores.
+    - Top performers.
+    - Frequently missed questions.
 
-### **6. Modern UI/UX**
+---
 
-- User-friendly design for both students and teachers.
-- Responsive layout for mobile, tablet, and desktop devices.
+### **6. Performance Reports**
+
+- **Students:**
+  - View individual results and track personal progress.
+- **Teachers:**
+  - Access detailed performance analytics, including:
+    - Average scores.
+    - Insights into challenging questions.
+    - Progress tracking for individual students and the whole class.
+
+---
+
+### **7. Modern UI/UX**
+
+- Fully responsive design optimized for **desktop** and **mobile** devices.
+- User-friendly quiz builder interface for teachers.
+- Engaging and intuitive quiz-taking experience for students.
 
 ---
 
@@ -69,22 +107,22 @@ Explore our latest project designed to simplify quiz management for students and
 - **Styling:** Tailwind CSS
 - **Backend:** Supabase (Authentication, Database)
 - **State Management:** React Context API
-- **APIs:** RESTful APIs for all backend operations
+- **API:** RESTful API
 
 ---
 
-## 📷 **Preview**
+## 📷 **Application Preview**
 
-Below are some snapshots of the Quiz Builder interface:
+🚧 **Coming Soon!** Screenshots showcasing the platform's UI/UX will be added soon.
 
 ---
 
-## 📬 **Contact**
+## 📬 **Contact Me**
 
-Have questions or want to collaborate? Reach out to me:
+Have questions or want to collaborate? Reach out at:
 
 - **Email:** [fifanaufal10@gmail.com](mailto:fifanaufal10@gmail.com)
-- **GitHub Issues:** [Open an issue](https://github.com/fifovalle/Quiz-Builder/issues)
+- **GitHub Issues:** [Report an Issue](https://github.com/fifovalle/Quiz-Builder/issues)
 
 ---
 
@@ -103,7 +141,7 @@ Have questions or want to collaborate? Reach out to me:
    npm install
    ```
 
-3. Set up environment variables for Supabase in a `.env.local` file:
+3. Configure Supabase environment variables in the `.env.local` file:
 
    ```plaintext
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
@@ -116,7 +154,7 @@ Have questions or want to collaborate? Reach out to me:
    npm run dev
    ```
 
-5. Open the app in your browser:
+5. Open the application in your browser:
    ```plaintext
    http://localhost:3000
    ```
@@ -124,5 +162,5 @@ Have questions or want to collaborate? Reach out to me:
 ---
 
 <div align="center">  
-  &copy; 2024 NAUFAL FIFA
+  &copy; 2024 **Naufal FIFA**  
 </div>

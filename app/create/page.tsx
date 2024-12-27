@@ -2,6 +2,7 @@
 import Loading from "@/components/loading";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { useDirect } from "@/hooks/backend/useDirect";
 import { FaPlus, FaSave, FaTrash } from "react-icons/fa";
 import { useCreateQuiz } from "@/hooks/backend/useCreateQuiz";
 
@@ -20,6 +21,8 @@ export default function CreateQuiz() {
     handleSaveQuiz,
     loading,
   } = useCreateQuiz();
+
+  useDirect();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-indigo-600 p-6 relative">

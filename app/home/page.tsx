@@ -1,8 +1,10 @@
 "use client";
+import i18n from "@/app/i18n";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LogoutModal from "@/components/logoutModal";
 import { useLogout } from "@/hooks/backend/useLogout";
+import { useDirect } from "@/hooks/backend/useDirect";
 import { useCheckUser } from "@/hooks/backend/useCheckUser";
 import {
   FaPlay,
@@ -14,10 +16,17 @@ import {
 
 export default function Home() {
   const router = useRouter();
-
+  const [currentLang, setCurrentLang] = useState("en");
   const [openLogoutModal, setOpenLogoutModal] = useState(false);
-
   const logout = useLogout();
+
+  const toggleLanguage = () => {
+    const newLang = currentLang === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+    setCurrentLang(newLang);
+  };
+
+  useDirect();
 
   const { role } = useCheckUser();
 
@@ -26,11 +35,10 @@ export default function Home() {
       {/* Header Section */}
       <div className="text-center mb-16 space-y-4 px-4 md:px-0">
         <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold text-white drop-shadow-lg transform transition-all duration-500 ease-in-out hover:scale-110 hover:drop-shadow-2xl">
-          Welcome to Quiz Builder
+          {i18n.t("welcome")}
         </h1>
         <p className="mt-4 text-xl sm:text-2xl md:text-3xl text-gray-200 leading-relaxed tracking-wide">
-          Create, take, and test your knowledge with fun quizzes! Let’s make
-          learning exciting!
+          {i18n.t("description")}
         </p>
       </div>
 
@@ -53,24 +61,22 @@ export default function Home() {
             onClick={() => router.push("/create")}
             className="w-full py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-xl transform hover:scale-110 hover:from-blue-600 hover:to-blue-800 transition-all duration-500 ease-in-out focus:ring-4 focus:ring-blue-300"
           >
-            <FaPlay className="inline-block mr-2" /> Start a New Quiz
+            <FaPlay className="inline-block mr-2" /> {i18n.t("startQuiz")}
           </button>
         </div>
 
         {/* View My Quizzes Button */}
         <div className="flex justify-center">
           <button
-            onClick={() => {
-              if (role === "student") {
-                router.push("/my-quizzes");
-              } else {
-                router.push("/quizzes");
-              }
-            }}
+            onClick={() =>
+              router.push(role === "student" ? "/my-quizzes" : "/quizzes")
+            }
             className="w-full py-4 px-6 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-lg shadow-xl transform hover:scale-110 hover:from-green-600 hover:to-green-800 transition-all duration-500 ease-in-out focus:ring-4 focus:ring-green-300"
           >
             <FaList className="inline-block mr-2" />
-            {role === "student" ? "View My Quizzes" : "View All Quizzes"}
+            {role === "student"
+              ? i18n.t("viewQuizzes2")
+              : i18n.t("viewQuizzes")}
           </button>
         </div>
 
@@ -82,17 +88,20 @@ export default function Home() {
             onClick={() => router.push("/quiz")}
             className="w-full py-4 px-6 bg-gradient-to-r from-gray-600 to-gray-800 text-white rounded-lg shadow-xl transform hover:scale-110 hover:from-gray-700 hover:to-gray-900 transition-all duration-500 ease-in-out focus:ring-4 focus:ring-gray-300"
           >
-            <FaCheckCircle className="inline-block mr-2" /> Take a Quiz
+            <FaCheckCircle className="inline-block mr-2" /> {i18n.t("takeQuiz")}
           </button>
         </div>
 
         {/* Settings Button */}
         <div className="flex justify-center">
           <button
-            onClick={() => router.push("/settings")}
+            onClick={toggleLanguage}
             className="w-full py-4 px-6 bg-gradient-to-r from-yellow-500 to-yellow-700 text-white rounded-lg shadow-xl transform hover:scale-110 hover:from-yellow-600 hover:to-yellow-800 transition-all duration-500 ease-in-out focus:ring-4 focus:ring-yellow-300"
           >
-            <FaCog className="inline-block mr-2" /> Settings
+            <FaCog className="inline-block mr-2" /> {i18n.t("changeLanguage")} -
+            <p className="inline-block ml-2">
+              {i18n.language === "en" ? "English" : "Arabic"}
+            </p>
           </button>
         </div>
 
@@ -102,7 +111,7 @@ export default function Home() {
             onClick={() => setOpenLogoutModal(true)}
             className="w-full py-4 px-6 bg-red-500 text-white rounded-lg shadow-xl transform hover:scale-110 hover:bg-red-600 transition-all duration-500 ease-in-out focus:ring-4 focus:ring-red-300"
           >
-            <FaSignOutAlt className="inline-block mr-2" /> Logout
+            <FaSignOutAlt className="inline-block mr-2" /> {i18n.t("logout")}
           </button>
         </div>
       </div>
@@ -110,8 +119,7 @@ export default function Home() {
       {/* Footer Section */}
       <div className="absolute bottom-8 text-sm text-gray-200 z-10 transform translate-y-4 opacity-80 hover:opacity-100 transition-all duration-300 px-4 md:px-0">
         <p>
-          &copy; {new Date().getFullYear()} Quiz Builder - All rights reserved.
-          Crafted with love and technology.
+          &copy; {new Date().getFullYear()} - {i18n.t("copyRight")}
         </p>
       </div>
 

@@ -1,9 +1,12 @@
 "use client";
+import i18n from "@/app/i18n";
 import { FaSave } from "react-icons/fa";
 import Loading from "@/components/loading";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useQuiz } from "@/hooks/backend/useQuiz";
+import { useDirect } from "@/hooks/backend/useDirect";
+import { useCheckAnswerQuiz } from "@/hooks/backend/useCheckAnswerQuiz";
 
 export default function Quiz() {
   const {
@@ -15,6 +18,20 @@ export default function Quiz() {
     handleSubmit,
   } = useQuiz();
 
+  const { hasAnswered } = useCheckAnswerQuiz();
+
+  useDirect();
+
+  if (hasAnswered) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-700">
+        <h1 className="text-3xl font-bold text-white">
+          {i18n.t("answerQuiz")}
+        </h1>
+      </div>
+    );
+  }
+
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-700 p-8">
       <ToastContainer />
@@ -22,7 +39,7 @@ export default function Quiz() {
       {/* Quiz Box */}
       <div className="relative w-full max-w-3xl bg-gradient-to-r from-indigo-400 via-blue-500 to-purple-600 p-10 rounded-3xl shadow-2xl border-4 border-white transform transition-all duration-500 hover:scale-105">
         <h2 className="text-5xl font-extrabold text-center text-white mb-12 tracking-wide transform transition-all duration-500 hover:text-yellow-400">
-          Take the Quiz and Test Your Knowledge!
+          {i18n.t("takeQuiz2")}
         </h2>
 
         {/* Displaying Quizzes */}
@@ -83,7 +100,7 @@ export default function Quiz() {
             }`}
           >
             <FaSave className="mr-3" />{" "}
-            {loadingSubmit ? <Loading /> : "Save Answers"}
+            {loadingSubmit ? <Loading /> : `${i18n.t("saveAnswers")}`}
           </button>
         </div>
       </div>

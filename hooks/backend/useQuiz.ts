@@ -23,6 +23,7 @@ interface Answer {
   answer: string;
   is_correct?: boolean;
   score?: number;
+  user_id?: string;
 }
 
 export function useQuiz() {
@@ -108,6 +109,7 @@ export function useQuiz() {
           quiz_id: quiz.id,
           question_index: question.id,
           answer: answers[quiz.id]?.[question.id] || "",
+          user_id: sessionStorage.getItem("uid") || "",
         }))
       );
 
