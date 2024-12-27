@@ -1,5 +1,3 @@
----
-
 # Welcome to **"Quiz Builder"** 🎓✨
 
 **Empowering Learning with Seamless Quiz Management**  
