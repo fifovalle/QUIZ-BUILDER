@@ -111,7 +111,7 @@
 
 ## 📷 **Application Preview**
 
-🚧 **Coming Soon!** Screenshots showcasing the platform's UI/UX will be added soon.
+![proyek94](https://github.com/user-attachments/assets/8c514fcb-1331-4be6-8214-aea5f29c59e7)
 
 ---
 
